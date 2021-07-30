@@ -434,7 +434,8 @@ public class Camera2BasicFragment extends Fragment
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mFile = new File(getActivity().getExternalFilesDir(null), "pic.jpg");
+        String fileName = getArguments().getString("FILE");
+        mFile = new File(getActivity().getExternalFilesDir(null), fileName);
     }
 
     @Override
@@ -493,6 +494,10 @@ public class Camera2BasicFragment extends Fragment
         CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
         try {
             for (String cameraId : manager.getCameraIdList()) {
+                String suppliedCameraId = getArguments().getString("CAMERAID");
+                if (!cameraId.equals(suppliedCameraId)) {
+                    continue;
+                }
                 CameraCharacteristics characteristics
                         = manager.getCameraCharacteristics(cameraId);
 

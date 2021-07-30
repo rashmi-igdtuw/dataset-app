@@ -16,9 +16,16 @@ package com.rashmi.datasetapp;
  * limitations under the License.
  */
 
+import android.content.Context;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -27,10 +34,34 @@ public class CameraActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         if (null == savedInstanceState) {
+            Camera2BasicFragment fragment = Camera2BasicFragment.newInstance();
+            Bundle args = new Bundle();
+            List<String> cameraIds = getAllCameras();
+            args.putString("CAMERAID", cameraIds.get(0));
+            args.putString("FILE", "abc.jpg");
+            fragment.setArguments(args);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, Camera2BasicFragment.newInstance())
+                    .replace(R.id.container, fragment)
                     .commit();
         }
     }
 
+    public List<String> getAllCameras() {
+        List<String> cameras = new ArrayList<>();
+        CameraManager manager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
+        try {
+            String[] idList = manager.getCameraIdList();
+            int maxCameraCnt = idList.length;
+            for (int index = 0; index < maxCameraCnt; index++) {
+                String cameraId = manager.getCameraIdList()[index];
+                CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
+                if (characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK) {
+                    cameras.add(cameraId);
+                }
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+        return cameras;
+    }
 }

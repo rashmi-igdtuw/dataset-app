@@ -53,14 +53,6 @@ public class MainActivity extends AppCompatActivity {
         textView.setText("Found following back cameras : " + String.join(",", cameraList));
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CAMERA_REQUEST && resultCode == RESULT_OK) {
-
-        }
-    }
-
     public List<String> getAllCameras() {
         List<String> cameras = new ArrayList<>();
         CameraManager manager = (CameraManager) this.getSystemService(Context.CAMERA_SERVICE);
