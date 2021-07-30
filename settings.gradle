@@ -1,0 +1,2 @@
+rootProject.name = "DatasetApp"
+include ':app'
