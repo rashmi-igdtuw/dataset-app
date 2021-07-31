@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         }
         TextView textView = (TextView) findViewById(R.id.camera_description);
         textView.setText("Found following back cameras : " + String.join(",", cameraList));
+        showPreview(cameraIds.get(0));
     }
 
     public List<String> getAllCameras() {
@@ -70,5 +71,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return cameras;
+    }
+
+    public void showPreview(String cameraId) {
+        Camera2BasicFragment fragment = Camera2BasicFragment.newInstance();
+        Bundle args = new Bundle();
+        args.putString("CAMERAID", cameraId);
+        fragment.setArguments(args);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.preview, fragment)
+                .commit();
     }
 }
