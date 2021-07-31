@@ -409,7 +409,7 @@ public class Camera2BasicFragment extends Fragment implements ActivityCompat.OnR
     }
 
     public void takePhoto(String fileName) {
-        mFile = new File(getActivity().getExternalFilesDir(null), fileName);
+        mFile = new File(getActivity().getExternalFilesDir(null), fileName + ".jpg");
         captureStillPicture();
     }
 

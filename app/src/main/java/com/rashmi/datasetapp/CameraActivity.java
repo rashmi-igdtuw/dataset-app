@@ -83,7 +83,7 @@ public class CameraActivity extends AppCompatActivity {
             public void run() {
                 if (photoTimer >= 5) {
                     doubleBeep();
-                    fragment.takePhoto(stage.name() + "/" + filename + "-" + cameraId + ".jpg");
+                    fragment.takePhoto(stage.name() + "/" + cameraId + "/" + filename);
                     h.postDelayed(new Runnable() {
                         @Override
                         public void run() {
