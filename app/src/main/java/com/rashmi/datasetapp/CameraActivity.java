@@ -62,7 +62,13 @@ public class CameraActivity extends AppCompatActivity {
         if (cameraIndex >= cameraIds.size() && stage == Stage.IN) {
             cameraIndex = 0;
             stage = Stage.GT;
-            takePicture(filename, cameraIds.get(cameraIndex));
+            final Handler h = new Handler();
+            h.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    takePicture(filename, cameraIds.get(cameraIndex));
+                }
+            }, 10000);
             return;
         }
         takePicture(filename, cameraIds.get(cameraIndex));
