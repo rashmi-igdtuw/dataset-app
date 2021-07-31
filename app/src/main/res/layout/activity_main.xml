@@ -22,7 +22,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:backgroundTint="@color/red"
-        android:text="Start Data Collection"
+        android:text="Click Next Set"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

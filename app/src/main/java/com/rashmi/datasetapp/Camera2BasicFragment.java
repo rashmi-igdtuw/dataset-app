@@ -405,16 +405,12 @@ public class Camera2BasicFragment extends Fragment implements ActivityCompat.OnR
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_camera2_basic, container, false);
-        String fileName = getArguments().getString("FILE");
-        mFile = new File(getActivity().getExternalFilesDir(null), fileName);
-        final Handler h = new Handler();
-        h.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                captureStillPicture();
-            }
-        }, 10000);
         return view;
+    }
+
+    public void takePhoto(String fileName) {
+        mFile = new File(getActivity().getExternalFilesDir(null), fileName);
+        captureStillPicture();
     }
 
     @Override
